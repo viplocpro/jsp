@@ -1,0 +1,110 @@
+package forms;
+
+import java.io.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.regex.Pattern;
+
+import javax.servlet.*;
+import javax.servlet.annotation.*;
+import javax.servlet.http.*;
+
+@WebServlet("/update-chat-content")
+public class UpdateChatContentOnly extends HttpServlet {
+	@Override
+	public void doPost (HttpServletRequest request, HttpServletResponse response)
+		throws ServletException, IOException {
+		response.setContentType("text/html;charset=utf-8");
+		HttpSession mySession = request.getSession();
+		String username = (String)mySession.getAttribute("user");
+		String currentUser = username;
+		
+		ReadChatContent(request,response,mySession);
+	}
+	
+	private void ReadChatContent (HttpServletRequest request, HttpServletResponse response,HttpSession mySession) throws IOException{
+		PrintWriter out = response.getWriter();
+		
+		String[] rooms = {"Male","Female","Dating","Teen","General"};
+		String room = (String)mySession.getAttribute("room");
+		String sessionUsername = (String)mySession.getAttribute("user");
+		
+		BufferedReader br = null;
+		try 
+		{
+			String currentLine ="";
+			br = new BufferedReader
+				    (new InputStreamReader(new FileInputStream("F:\\"+rooms[Integer.parseInt(room)]+".txt"),"UTF-8"));
+			
+			while ((currentLine = br.readLine()) != null){
+				if (currentLine.trim().length()>1)
+				{
+					String[] aLine = currentLine.split(Pattern.quote("^"));
+					
+					String dbUsername=aLine[0];
+					String date=aLine[aLine.length-1];
+					String chatContent="";
+					
+					for (int i=1; i< aLine.length-1; i++) //xử lý khi nội dung chat có dấu chứa dấu ^
+					{
+						if (i==aLine.length-2)
+							chatContent+=aLine[i];
+						else
+							chatContent+=aLine[i]+"^";
+					}
+					
+					if (dbUsername.equals(sessionUsername))
+					{
+						out.println(""
+						+ "<div class=\"your-msg\">"
+					  			+"<div class=\"username\">"
+					  				+ "<span>"+dbUsername+":</span>"
+				  				+ "</div>"
+				  				+ "<div class=\"msg your-msg-color\">"
+				  				+ "<span>"+chatContent+"</span>"
+			  				+ "</div>"
+			  			+ "<div class=\"time your-time\">"
+					  			+date
+				  		  +"</div>"
+				  		+"</div>");
+					}
+					else
+					{
+						out.println(""
+						+ "<div class=\"others-msg\">"
+					  			+"<div class=\"username\">"
+					  				+ "<span>"+dbUsername+":</span>"
+					  			+ "</div>"
+					  			+ "<div class=\"msg others-msg-color\">"
+					  			+ "<span>"+chatContent+"</span>"
+					  		+ "</div>"
+					  		+ "<div class=\"time others-time\">"
+					  			+date
+			  				  +"</div>"
+		  				+ "</div>");
+					}
+				}
+			}
+			
+		} 
+		
+		catch (IOException e) {
+			e.printStackTrace();
+
+		} 
+		
+		finally 
+		{
+			try {
+				if (br != null)
+					br.close();
+			} 
+			
+			catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}	
+		
+	}
+}

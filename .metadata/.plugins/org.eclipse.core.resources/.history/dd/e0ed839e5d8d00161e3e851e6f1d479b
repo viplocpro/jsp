@@ -1,0 +1,55 @@
+package forms;
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.annotation.*;
+import javax.servlet.http.*;
+
+@WebServlet("/login")
+public class LoginForm extends HttpServlet {
+	@Override
+	public void doGet (HttpServletRequest request, HttpServletResponse response)
+		throws ServletException, IOException {
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println
+	      ("<!DOCTYPE html>"+
+	      "<html><head><meta charset=\"utf-8\">"+
+	      	"<title>Chat Room Servlet</title>"+
+	      	"<link rel=\"stylesheet\" type=\"text/css\" href=\"css/bootstrap.min.css\">"+
+	      	"<link rel=\"stylesheet\" type=\"text/css\" href=\"css/bootstrap-theme.min.css\">"+
+	      	"<link rel=\"stylesheet\" type=\"text/css\" href=\"css/custom.css\">"+
+	      	"<script src=\"jquery.min.js\" type=\"text/javascript\"></script>"+
+	      	"<script src=\"js/bootstrap.min.js\" type=\"text/javascript\"></script>"+
+	      "</head>"
+	      + "<body>"
+	      + "<div class=\"container\">"
+	      	+ "<div class=\"row\">"
+	      		+ "<div class=\"col-md-4\"></div>"+
+	      			"<div class=\"col-md-4 margin-top\">"+
+	      				"<div class=\"form-heading\"><h2>Đăng nhập</h2></div>"
+	  				+ "<div class=\"login-form\">"
+	  					+ "<form>"
+	  						+ "<div class=\"form-group has-feedback has-feedback-left\">"+
+	      						"<input class=\"form-control\" type=\"text\" name=\"username\" placeholder=\"Tên đăng nhập\" required autofocus>"+
+	      							"<span class=\"glyphicon glyphicon-user form-control-feedback\"></span>"+
+	      							"</div>"+
+	      					  "<div class=\"form-group has-feedback\">"+
+	      					  	"<input class=\"form-control\" type=\"password\" name=\"password\" placeholder=\"Mật khẩu\" required>"+
+	      					  	"<span class=\"glyphicon glyphicon-lock form-control-feedback\"></span>"
+	  					  	 + "</div>"
+	  					  	 + "<div class=\"form-group\">"
+	  					  	 	+ "<label>Chưa có tài khoản ? <a href=\"register\">Đăng ký</a></label>"
+	  					  	 + "</div>"+
+					  	 	"<div class=\"form-group\">"+
+					  	 		"<button class=\"btn-submit btn-block\" type=\"submit\">Tới</button>"+
+				  	 		"</div>"
+			  	 		+ "</form>"
+		  	 		+ "</div>"
+	  	 		+ "</div>"+
+	  			"<div class=\"col-md-4\"></div>"
+			+ "</div>"
+		+ "</div></body></html>");
+	}
+}
+

@@ -1,0 +1,16 @@
+function ScrollIntoView(){
+	var objDiv = document.getElementsByClassName("chat-content")[0];
+	objDiv.scrollTop = objDiv.scrollHeight;
+}
+
+var wage = document.getElementById("submit-chat");
+wage.addEventListener("keydown", function (e) {
+    if (e.keyCode === 13) {  //checks whether the pressed key is "Enter"
+        validate(e);
+    }
+});
+
+function validate(e) {
+    var text = e.value;
+    //validation of the input...
+}

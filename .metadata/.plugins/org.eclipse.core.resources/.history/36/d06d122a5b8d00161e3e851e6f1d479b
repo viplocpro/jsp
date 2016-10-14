@@ -1,0 +1,4 @@
+function ScrollIntoView(){
+	var objDiv = document.getElementById("chat-content");
+	objDiv.scrollTop = objDiv.scrollHeight;
+}

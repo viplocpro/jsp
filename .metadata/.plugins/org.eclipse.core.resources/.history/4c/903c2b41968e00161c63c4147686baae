@@ -1,0 +1,48 @@
+package forms;
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.annotation.*;
+import javax.servlet.http.*;
+
+@WebServlet("/login-result")
+public class LoginRedisplay extends HttpServlet {
+	@Override
+	public void doGet (HttpServletRequest request, HttpServletResponse response)
+		throws ServletException, IOException {
+		String errorData=MakeErrorData(request, response);
+		response.sendRedirect("register"
+                + "?" + errorData);
+	}
+	
+	private String MakeErrorData (HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		String errorData = "";
+		String[] parameters = GetParameters(request,response);
+		
+		if (isMissing(parameters))
+		{
+			String hashPassword=HashPassword(parameters[1]);
+			
+			errorData+="username="+parameters[0]+"&password="+hashPassword+"&gender="+parameters[2]+"&status="+parameters[3];
+		}
+		else
+		{
+			boolean done=CheckUserExist(parameters[0]);
+			if (done)
+				errorData="result=exist";
+			else
+			{
+				if(NewUser(GetParameters(request,response)))
+					errorData="username="+parameters[0]+"&result=success";
+				else
+					errorData="result=error";
+			}
+		}
+		
+		return errorData;
+		
+	}
+}
+

@@ -1,0 +1,31 @@
+package forms;
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.annotation.*;
+import javax.servlet.http.*;
+
+@WebServlet("/log-out")
+public class LogOut extends HttpServlet {
+	@Override
+	public void doPost (HttpServletRequest request, HttpServletResponse response)
+		throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		HttpSession mySession = request.getSession();
+		String username = (String)mySession.getAttribute("user");
+		
+		if (username!=null)
+		{
+			mySession.invalidate();
+			response.sendRedirect("chat-room");
+		}
+		
+		else
+		{
+			response.sendRedirect("login");
+		}
+	}
+	
+	
+}
+

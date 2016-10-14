@@ -1,0 +1,218 @@
+body{
+
+	background-image: url("../images/bg.jpg");	
+	background-size:cover;
+	color:white;
+}
+
+a {
+	text-decoration: none;
+	color: #93cbff;
+}
+
+a:hover	 {
+	color: #fef810;
+}
+
+h2{
+	margin: 0;
+}
+
+.margin-top-10{
+	margin-top:10%;
+}
+
+.margin-top-5{
+	margin-top:5%;
+}
+
+.register-form, .login-form, .room-select-form{
+	padding: 4%;
+	
+	text-align: center;
+}
+
+
+.room-select-form{
+	text-align: left;
+	color: black;
+}
+
+.form-heading{
+	color: white;
+	text-align: center;
+	padding: 2%;
+	clear:both;
+}
+
+.non-btn{
+	background-color: rgba(255,255,255,0);
+	border:none;
+	font-weight: lighter;
+}
+
+.non-btn:hover{
+	color: #f43770;
+}
+
+.currentUser{
+	font-weight: bold;
+	float: right;
+}
+
+.currentUser a:hover{
+	color: #f43770;
+	text-decoration: none;
+}
+
+.currentUser a{
+	color: white;
+}
+
+.msg{
+	padding: 5%;
+	margin-top: 1.5%;
+}
+
+.your-msg{
+	color: white;
+	float: right;
+	clear:both;
+}
+
+.your-msg-color{
+	background-color: #f43770;
+	border-radius: 10px 0px 0px 10px;
+	float: right;
+	
+}
+
+.others-msg{
+	color: black;
+	float:left;
+	clear:both;	
+}
+
+.others-msg-color{
+	background-color: #f0f0f0;
+	border-radius: 0px 10px 10px 0px;
+	float:left;
+}
+
+.chat-content{
+	background-color: white;
+	border-radius: 10px;
+	
+}
+
+.username{
+	font-weight: bold;
+}
+
+
+
+.time{
+	font-size: 80%;
+	color: #cccccc;
+	clear: both;
+	
+}
+
+.your-time{
+	float: right;
+}
+
+.others-time{
+	float: left;
+}
+
+.scrollable{
+	padding: 4%;
+	color: black;
+	overflow-x: auto;
+	height:300px;
+}
+
+.btn-submit{
+	background-color: #ff405c;
+	color: white;
+	border:none;
+	padding: 2%;
+	font-size: 150%;
+	transition: all .3s linear;
+}
+
+.btn-submit:hover{
+	box-shadow: 3px 3px 5px 2px #6a0000;
+	
+}
+
+.form-select option{
+	color: black;
+}
+
+.form-select{
+	text-align: left;
+}
+
+.form-control{
+	 background-color: rgba(255,255,255,0.3);
+	 color: white;
+}
+
+.form-control::-webkit-input-placeholder
+{
+      color: rgba(255,255,255,1.0);  
+}
+
+.form-control::-moz-placeholder
+{
+      color: rgba(255,255,255,1.0);  
+}
+
+
+
+.form-control:-ms-input-placeholder
+{
+      color: rgba(255,255,255,1.0);  
+}
+
+.input-chat::-webkit-input-placeholder{
+	color: #cccccc;
+}
+
+.input-chat{
+	background-color: white;
+	color: black;
+}
+
+.cursor-pointer{
+	cursor: pointer;
+}
+
+.list-group-item:hover{
+	background-color: #cccccc;
+}
+
+
+.radio label {
+	display: block;
+}
+
+.missing{
+	background-color: #ff4848;
+}
+
+.new-message{
+	width: 555px;
+	height: 50px;
+	position: absolute;
+	top: 55px;
+	left: 15px;
+	cursor: pointer;
+	padding: 2%;
+	border-bottom: 1px solid #cccccc;
+	text-align: center;
+	z-index: -5;
+	display:none;
+}

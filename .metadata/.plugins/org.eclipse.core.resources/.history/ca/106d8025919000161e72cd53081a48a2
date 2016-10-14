@@ -1,0 +1,128 @@
+package forms;
+
+import java.io.*;
+import java.util.regex.Pattern;
+import java.net.URLEncoder;
+import javax.servlet.*;
+import javax.servlet.annotation.*;
+import javax.servlet.http.*;
+
+@WebServlet("/room-select")
+public class RoomSelect extends HttpServlet {
+	@Override
+	public void doPost (HttpServletRequest request, HttpServletResponse response)
+		throws ServletException, IOException {
+		response.setContentType("text/html;charset=utf-8");
+		response.setCharacterEncoding("UTF-8");
+		HttpSession mySession = request.getSession();
+		String username = (String)mySession.getAttribute("user");
+		
+		if (username!=null)
+		{
+			String result=CheckRoomRules(GetUserInfos(username),request.getParameter("room"));
+			if(result.equals(""))
+			{
+				response.sendRedirect("chat-room");
+			}
+			else
+			{
+				response.sendRedirect("room-list?result="+result);
+			}
+		}
+		else
+		{
+			response.sendRedirect("login");
+		}
+		
+		 
+	}
+	
+	private String[] GetUserInfos(String username){
+		String[] userInfos= new String[6];
+		BufferedReader br = null;
+
+		try 
+		{
+			String currentLine ="";
+			br = new BufferedReader
+				    (new InputStreamReader(new FileInputStream("F:\\ChatDatabase.txt"),"UTF-8"));
+
+			while ((currentLine = br.readLine()) != null){
+				 
+				String[] currentInfos = currentLine.split(Pattern.quote("^")); //username co trong database
+				String dbUsername = currentInfos[0]; //username
+				
+				if (dbUsername.equals(username))
+				{
+					
+					try {
+						if (br != null)
+							br.close();
+						return currentInfos;
+					} 
+					catch (IOException ex) {
+						ex.printStackTrace();
+					}
+					
+				}
+			}
+		} 
+		
+		catch (IOException e) {
+			e.printStackTrace();
+
+		} 
+		
+		finally 
+		{
+			try {
+				if (br != null)
+					br.close();
+			} 
+			
+			catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}	
+		
+		
+		return userInfos;
+	}
+	
+	private String CheckRoomRules(String[] infos, String room){
+		
+		String age = infos[2]; //age
+		String gender = infos[3]; //gender
+		String status = infos[4]; //status
+		String result = "";
+		switch(room){
+			case "0": {
+				if(gender.equals("1"))
+					return result;
+				return result="Phải là Nam";
+			}
+			case "1": {
+				if(gender.equals("0"))
+					return result;
+				return result="Phải là Nữ";
+			}
+			case "2": {
+				if(status.equals("0") && Integer.parseInt(age)>=16)
+					return result;
+				return result="Phải độc thân và 16+";
+				
+			}
+			case "3": {
+				if(Integer.parseInt(age)>=13 && Integer.parseInt(age)<=19)
+					return result;
+				return result="Tuổi teen từ <13,19>. Bạn đang ở tuổi "+age;
+			}
+			case "4": {
+				return result;
+			}
+		}
+		
+		return result;
+	}
+}
+

@@ -1,0 +1,5 @@
+#Tomcat publish data
+#Thu Oct 13 11:25:36 ICT 2016
+org.eclipse.jst.jee.server\:request-headers=C\:\\Users\\HLoc\\Documents\\apache-tomcat-7.0.70\\wtpwebapps\\request-headers
+org.eclipse.jst.jee.server\:ChatServlet=C\:\\Users\\HLoc\\Documents\\apache-tomcat-7.0.70\\wtpwebapps\\ChatServlet
+org.eclipse.jst.jee.server\:request-headers-exercises=C\:\\Users\\HLoc\\Documents\\apache-tomcat-7.0.70\\wtpwebapps\\request-headers-exercises
